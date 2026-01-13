@@ -1,12 +1,11 @@
-
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Info from './pages/Info';
-import Assignments from './pages/Assignments';
-import Contact from './pages/Contact';
-import { Page } from './types';
+import Navbar from './components/Navbar.tsx';
+import Footer from './components/Footer.tsx';
+import Home from './pages/Home.tsx';
+import Info from './pages/Info.tsx';
+import Assignments from './pages/Assignments.tsx';
+import Contact from './pages/Contact.tsx';
+import { Page } from './types.ts';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Home);

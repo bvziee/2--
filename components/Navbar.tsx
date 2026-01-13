@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Page } from '../types';
+import { Page } from '../types.ts';
 
 interface NavbarProps {
   currentPage: Page;
@@ -23,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <span 
-              className="text-xl font-bold text-blue-600 cursor-pointer"
+              className="text-xl font-bold text-blue-600 cursor-pointer select-none"
               onClick={() => setCurrentPage(Page.Home)}
             >
               2-р Баг
@@ -36,10 +35,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
               <button
                 key={item.id}
                 onClick={() => setCurrentPage(item.id)}
-                className={`text-sm font-medium transition-colors py-5 ${
+                className={`text-sm font-medium transition-colors py-5 border-b-2 ${
                   currentPage === item.id 
-                  ? 'text-blue-600 border-b-2 border-blue-600' 
-                  : 'text-gray-600 hover:text-blue-500'
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-600 border-transparent hover:text-blue-500 hover:border-blue-200'
                 }`}
               >
                 {item.label}
@@ -52,6 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-600 hover:text-gray-900 focus:outline-none"
+              aria-label="Toggle menu"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isOpen ? (
@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
                 setCurrentPage(item.id);
                 setIsOpen(false);
               }}
-              className={`block w-full text-left px-4 py-2 text-base font-medium ${
+              className={`block w-full text-left px-4 py-3 text-base font-medium ${
                 currentPage === item.id 
                 ? 'text-blue-600 bg-blue-50' 
                 : 'text-gray-600 hover:bg-gray-50'

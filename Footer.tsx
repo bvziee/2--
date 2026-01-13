@@ -1,0 +1,1 @@
+// This file is deprecated. Please use ./components/Footer.tsx instead.

@@ -1,10 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Page } from '../types';
-
-interface HomeProps {
-  onNavigate: (page: Page) => void;
-}
+import { Page } from '../types.ts';
 
 const slides = [
   {
@@ -24,7 +19,7 @@ const slides = [
   }
 ];
 
-const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+const Home: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -51,11 +46,11 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               className="w-full h-full object-cover brightness-50"
             />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
-              <p className="text-lg md:text-2xl max-w-2xl">{slide.description}</p>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">{slide.title}</h1>
+              <p className="text-lg md:text-2xl max-w-2xl drop-shadow-md">{slide.description}</p>
               <button 
                 onClick={() => onNavigate(Page.Info)}
-                className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all transform hover:scale-105"
+                className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all transform hover:scale-105 shadow-xl"
               >
                 Дэлгэрэнгүй үзэх
               </button>
@@ -69,37 +64,44 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
+                index === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/80'
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </div>
 
       {/* Introduction Section */}
-      <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Вэб сайтын тухай товч танилцуулга</h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Вэб сайтын тухай товч танилцуулга</h2>
+            <p className="text-gray-600 leading-relaxed mb-6 text-lg">
               Сайн байна уу? Энэхүү вэб сайт нь 2-р багийн хийж гүйцэтгэсэн "Вэб Технологи" хичээлийн бие даалтын ажил юм. 
               Бид энэхүү сайтаараа дамжуулан орчин үеийн технологийн мэдээлэл болон өөрсдийн сургалтын явцыг харуулахыг зорьсон.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-lg">
               Та манай сайтаас мэдээллийн технологийн талаарх сонирхолтой нийтлэлүүд, бидний бие даалт болон гэрийн даалгаврын 
               явцыг хянах боломжтой Checklist хэсгүүдийг үзэж сонирхох боломжтой.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <div className="flex items-center space-x-2 text-blue-600 font-medium">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+            <div className="mt-10 flex flex-wrap gap-6">
+              <div className="flex items-center space-x-2 text-blue-600 font-semibold">
+                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
                 <span>Мэргэжлийн дизайн</span>
               </div>
-              <div className="flex items-center space-x-2 text-blue-600 font-medium">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+              <div className="flex items-center space-x-2 text-blue-600 font-semibold">
+                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
                 <span>Хэрэглэхэд хялбар</span>
               </div>
-              <div className="flex items-center space-x-2 text-blue-600 font-medium">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+              <div className="flex items-center space-x-2 text-blue-600 font-semibold">
+                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
                 <span>Шуурхай хариу</span>
               </div>
             </div>
@@ -108,41 +110,41 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <img 
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop" 
               alt="About our team" 
-              className="rounded-2xl shadow-2xl"
+              className="rounded-3xl shadow-2xl"
             />
-            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg hidden lg:block">
-              <p className="text-blue-600 font-bold text-2xl">100%</p>
-              <p className="text-gray-500 text-sm">Чанарын баталгаа</p>
+            <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-2xl shadow-xl hidden lg:block border border-gray-100">
+              <p className="text-blue-600 font-black text-4xl">100%</p>
+              <p className="text-gray-500 font-medium uppercase tracking-wider text-xs mt-1">Чанарын баталгаа</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Navigation Overview */}
-      <section className="bg-gray-100 py-16">
+      <section className="bg-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Вэб сайтын агуулга</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div onClick={() => onNavigate(Page.Info)} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer text-center group">
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">Вэб сайтын агуулга</h2>
+          <div className="grid md:grid-cols-3 gap-10">
+            <div onClick={() => onNavigate(Page.Info)} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer text-center group transform hover:-translate-y-2">
+              <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Мэдээллийн хуудас</h3>
-              <p className="text-gray-600 text-sm">Мэдээллийн технологийн салбарт гарч буй сүүлийн үеийн мэдээ мэдээлэл.</p>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Мэдээллийн хуудас</h3>
+              <p className="text-gray-500 leading-relaxed">Мэдээллийн технологийн салбарт гарч буй сүүлийн үеийн мэдээ мэдээлэл.</p>
             </div>
-            <div onClick={() => onNavigate(Page.Assignments)} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer text-center group">
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+            <div onClick={() => onNavigate(Page.Assignments)} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer text-center group transform hover:-translate-y-2">
+              <div className="w-20 h-20 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Даалгавар хянах</h3>
-              <p className="text-gray-600 text-sm">Бие даалт болон гэрийн даалгавруудын гүйцэтгэлийг хянах checklist.</p>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Даалгавар хянах</h3>
+              <p className="text-gray-500 leading-relaxed">Бие даалт болон гэрийн даалгавруудын гүйцэтгэлийг хянах checklist.</p>
             </div>
-            <div onClick={() => onNavigate(Page.Contact)} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer text-center group">
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <div onClick={() => onNavigate(Page.Contact)} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer text-center group transform hover:-translate-y-2">
+              <div className="w-20 h-20 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Холбоо барих</h3>
-              <p className="text-gray-600 text-sm">Санал хүсэлт болон асуух зүйлсээ бидэнд илгээх боломжтой.</p>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Холбоо барих</h3>
+              <p className="text-gray-500 leading-relaxed">Санал хүсэлт болон асуух зүйлсээ бидэнд илгээх боломжтой.</p>
             </div>
           </div>
         </div>
