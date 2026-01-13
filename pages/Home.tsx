@@ -3,19 +3,19 @@ import { Page } from '../types.ts';
 
 const slides = [
   {
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
-    title: 'Вэб Технологийн Ертөнц',
-    description: 'Орчин үеийн вэб хөгжүүлэлтийн чиг хандлагатай танилцаарай.'
+    image: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=1200&auto=format&fit=crop',
+    title: 'VALVE-ИЙН ЕРТӨНЦӨД ТАВТАЙ МОРИЛ',
+    description: 'Steam Deck болон хамгийн сүүлийн үеийн Source 2 технологи.'
   },
   {
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop',
-    title: '2-р Багийн Төсөл',
-    description: 'Бидний хийж гүйцэтгэсэн бүтээлүүд болон даалгавруудыг эндээс харах боломжтой.'
+    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop',
+    title: 'DOTA 2 БОЛОН CS2-ИЙН ХӨГЖҮҮЛЭЛТ',
+    description: '2-р багийн хамт олон Valve Store-ын системийг судалж байна.'
   },
   {
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop',
-    title: 'Суралцах Аялал',
-    description: 'Шинэ технологи, шинэ мэдлэг, шинэ боломжууд.'
+    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop',
+    title: 'ТОГЛООМ ХӨГЖҮҮЛЭЛТИЙН ИРЭЭДҮЙ',
+    description: 'Вэб технологи ба Steam API интеграци.'
   }
 ];
 
@@ -25,14 +25,14 @@ const Home: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) =>
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="animate-fadeIn">
+    <div className="animate-fadeIn bg-[#171a21]">
       {/* Hero Slider */}
-      <div className="relative h-[400px] md:h-[600px] overflow-hidden">
+      <div className="relative h-[500px] md:h-[700px] overflow-hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -43,108 +43,97 @@ const Home: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) =>
             <img 
               src={slide.image} 
               alt={slide.title} 
-              className="w-full h-full object-cover brightness-50"
+              className="w-full h-full object-cover brightness-[0.4]"
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">{slide.title}</h1>
-              <p className="text-lg md:text-2xl max-w-2xl drop-shadow-md">{slide.description}</p>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+              <h1 className="text-4xl md:text-7xl font-black mb-6 text-white tracking-tighter drop-shadow-2xl max-w-4xl uppercase italic">
+                {slide.title}
+              </h1>
+              <p className="text-lg md:text-2xl max-w-2xl text-[#66c0f4] font-medium drop-shadow-md">
+                {slide.description}
+              </p>
               <button 
                 onClick={() => onNavigate(Page.Info)}
-                className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all transform hover:scale-105 shadow-xl"
+                className="mt-10 px-10 py-4 bg-[#a4d007] hover:bg-[#bef00a] text-[#171a21] rounded-sm font-black transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(164,208,7,0.4)] uppercase tracking-widest"
               >
-                Дэлгэрэнгүй үзэх
+                ОДОО ТАНИЛЦАХ
               </button>
             </div>
           </div>
         ))}
-        {/* Dots */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-3">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/80'
+              className={`h-1 transition-all duration-300 ${
+                index === currentSlide ? 'bg-[#66c0f4] w-12' : 'bg-white/20 w-6 hover:bg-white/40'
               }`}
-              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </div>
 
-      {/* Introduction Section */}
-      <section className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Вэб сайтын тухай товч танилцуулга</h2>
-            <p className="text-gray-600 leading-relaxed mb-6 text-lg">
-              Сайн байна уу? Энэхүү вэб сайт нь 2-р багийн хийж гүйцэтгэсэн "Вэб Технологи" хичээлийн бие даалтын ажил юм. 
-              Бид энэхүү сайтаараа дамжуулан орчин үеийн технологийн мэдээлэл болон өөрсдийн сургалтын явцыг харуулахыг зорьсон.
+      {/* Featured Section */}
+      <section className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-20 items-center">
+          <div className="order-2 md:order-1">
+            <h2 className="text-4xl font-black text-white mb-8 tracking-tighter uppercase italic">
+              Valve <span className="text-[#66c0f4]">x</span> 2-р Баг
+            </h2>
+            <p className="text-[#c5c3c0] leading-relaxed mb-8 text-xl">
+              Бид энэхүү бие даалтаараа дэлхийн хамгийн том тоглоомын платформ болох **Steam** болон түүнийг бүтээгч **Valve Corporation**-ийн вэб архитектурыг судалж байна.
             </p>
-            <p className="text-gray-600 leading-relaxed text-lg">
-              Та манай сайтаас мэдээллийн технологийн талаарх сонирхолтой нийтлэлүүд, бидний бие даалт болон гэрийн даалгаврын 
-              явцыг хянах боломжтой Checklist хэсгүүдийг үзэж сонирхох боломжтой.
+            <p className="text-[#c5c3c0] leading-relaxed text-xl mb-10">
+              Source 2 хөдөлгүүрийн вэб хэсэг, Steam Store-ын UI дизайн болон хэрэглэгчийн туршлагыг (UX) орчин үеийн React технологи ашиглан хэрхэн сайжруулж болохыг бид харуулах болно.
             </p>
-            <div className="mt-10 flex flex-wrap gap-6">
-              <div className="flex items-center space-x-2 text-blue-600 font-semibold">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                </div>
-                <span>Мэргэжлийн дизайн</span>
-              </div>
-              <div className="flex items-center space-x-2 text-blue-600 font-semibold">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                </div>
-                <span>Хэрэглэхэд хялбар</span>
-              </div>
-              <div className="flex items-center space-x-2 text-blue-600 font-semibold">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                </div>
-                <span>Шуурхай хариу</span>
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+               <div className="bg-[#1b2838] p-4 rounded border border-[#66c0f4]/10">
+                  <p className="text-[#66c0f4] font-black text-3xl">95%</p>
+                  <p className="text-xs text-gray-400 uppercase tracking-widest mt-1">Тоглогчдын сэтгэл ханамж</p>
+               </div>
+               <div className="bg-[#1b2838] p-4 rounded border border-[#66c0f4]/10">
+                  <p className="text-[#a4d007] font-black text-3xl">120M+</p>
+                  <p className="text-xs text-gray-400 uppercase tracking-widest mt-1">Steam хэрэглэгчид</p>
+               </div>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative order-1 md:order-2">
+            <div className="absolute -inset-4 bg-[#66c0f4]/20 blur-3xl rounded-full"></div>
             <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop" 
-              alt="About our team" 
-              className="rounded-3xl shadow-2xl"
+              src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?q=80&w=600&auto=format&fit=crop" 
+              alt="Gaming Setup" 
+              className="rounded-lg shadow-2xl relative z-10 border border-white/5"
             />
-            <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-2xl shadow-xl hidden lg:block border border-gray-100">
-              <p className="text-blue-600 font-black text-4xl">100%</p>
-              <p className="text-gray-500 font-medium uppercase tracking-wider text-xs mt-1">Чанарын баталгаа</p>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Navigation Overview */}
-      <section className="bg-gray-100 py-20">
+      {/* Steam Categories */}
+      <section className="bg-[#1b2838]/50 py-24 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">Вэб сайтын агуулга</h2>
-          <div className="grid md:grid-cols-3 gap-10">
-            <div onClick={() => onNavigate(Page.Info)} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer text-center group transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <h2 className="text-3xl font-black text-center mb-16 text-white uppercase tracking-widest italic">Судалгааны Чиглэлүүд</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="steam-card p-8 rounded-lg cursor-pointer group">
+              <div className="w-16 h-16 bg-[#66c0f4]/10 text-[#66c0f4] rounded-lg flex items-center justify-center mb-8 group-hover:bg-[#66c0f4] group-hover:text-[#171a21] transition-all duration-300">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Мэдээллийн хуудас</h3>
-              <p className="text-gray-500 leading-relaxed">Мэдээллийн технологийн салбарт гарч буй сүүлийн үеийн мэдээ мэдээлэл.</p>
+              <h3 className="text-xl font-black mb-4 text-white uppercase italic">Steam Store UI</h3>
+              <p className="text-gray-400 leading-relaxed">Дэлгүүрийн нүүр хуудасны дизайн болон худалдан авалтын урсгалын судалгаа.</p>
             </div>
-            <div onClick={() => onNavigate(Page.Assignments)} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer text-center group transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+            <div className="steam-card p-8 rounded-lg cursor-pointer group">
+              <div className="w-16 h-16 bg-[#a4d007]/10 text-[#a4d007] rounded-lg flex items-center justify-center mb-8 group-hover:bg-[#a4d007] group-hover:text-[#171a21] transition-all duration-300">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Даалгавар хянах</h3>
-              <p className="text-gray-500 leading-relaxed">Бие даалт болон гэрийн даалгавруудын гүйцэтгэлийг хянах checklist.</p>
+              <h3 className="text-xl font-black mb-4 text-white uppercase italic">Steam API</h3>
+              <p className="text-gray-400 leading-relaxed">Тоглоомын дата, хэрэглэгчийн статистикийг вэб рүү татах интеграци.</p>
             </div>
-            <div onClick={() => onNavigate(Page.Contact)} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer text-center group transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <div className="steam-card p-8 rounded-lg cursor-pointer group">
+              <div className="w-16 h-16 bg-purple-500/10 text-purple-400 rounded-lg flex items-center justify-center mb-8 group-hover:bg-purple-500 group-hover:text-[#171a21] transition-all duration-300">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Холбоо барих</h3>
-              <p className="text-gray-500 leading-relaxed">Санал хүсэлт болон асуух зүйлсээ бидэнд илгээх боломжтой.</p>
+              <h3 className="text-xl font-black mb-4 text-white uppercase italic">Аюулгүй байдал</h3>
+              <p className="text-gray-400 leading-relaxed">Steam Guard болон хэрэглэгчийн мэдээллийн нууцлалын вэб шийдлүүд.</p>
             </div>
           </div>
         </div>

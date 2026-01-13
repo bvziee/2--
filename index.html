@@ -3,12 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2-р баг - Оюутны Вэб Сайт</title>
+  <title>2-р баг x Valve Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --steam-dark: #171a21;
+      --steam-blue: #1b2838;
+      --steam-light-blue: #66c0f4;
+      --steam-green: #a4d007;
+    }
     body {
       font-family: 'Inter', sans-serif;
+      background-color: var(--steam-dark);
+      color: #c5c3c0;
       overflow-x: hidden;
       margin: 0;
       padding: 0;
@@ -20,9 +28,20 @@
     .animate-fadeIn {
       animation: fadeIn 0.5s ease-out forwards;
     }
-    /* Хэрэв контент бага бол footer-ийг доор байлгах */
     main {
-      min-height: calc(100vh - 64px - 160px);
+      min-height: calc(100vh - 64px - 200px);
+    }
+    .steam-gradient {
+      background: linear-gradient(180deg, #1b2838 0%, #171a21 100%);
+    }
+    .steam-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+    .steam-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--steam-light-blue);
     }
   </style>
 <script type="importmap">
@@ -38,7 +57,7 @@
 }
 </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-[#171a21]">
   <div id="root"></div>
   <script type="module" src="index.tsx"></script>
 </body>
