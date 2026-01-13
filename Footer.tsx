@@ -1,1 +1,1 @@
-// This file is deprecated. Please use ./components/Footer.tsx instead.
+// Энэ файл ашиглагдахгүй байгаа тул ./components/Footer.tsx файлыг ашиглана уу.
